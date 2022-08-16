@@ -14,7 +14,12 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Header />
-        <ToastContainer position="top-center" />
+        <ToastContainer
+          position="top-center"
+          autoClose={2000}
+          hideProgressBar
+          theme="colored"
+        />
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/add" element={<AddEdit />} />
