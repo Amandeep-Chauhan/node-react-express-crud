@@ -33,6 +33,14 @@ const AddEdit = () => {
     }
   }
 
+  const updateUser = async (data) => {
+    const res = await axios.put(`http://localhost:5000/user/${id}`, data)
+    if (res.status === 200) {
+      toast.success("User updated successfully")
+      navigate("/")
+    }
+  }
+
   console.log("id: ", id)
   const getUser = async (id) => {
     const res = await axios.get(`http://localhost:5000/user/${id}`)
@@ -54,9 +62,12 @@ const AddEdit = () => {
     if (!form.name || !form.email || !form.contact) {
       return toast.error("Please fill all the fields")
     }
-    console.log(form)
 
-    addUser(form)
+    if (id) {
+      updateUser(form)
+    } else {
+      addUser(form)
+    }
   }
 
   return (
@@ -98,7 +109,7 @@ const AddEdit = () => {
         />
       </div>
       <button type="submit" className="btn btn-primary">
-        Submit
+        {id ? "Update" : "Submit"}
       </button>
     </form>
   )
